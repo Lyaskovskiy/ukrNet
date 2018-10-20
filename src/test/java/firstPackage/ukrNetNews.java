@@ -16,39 +16,41 @@ public class ukrNetNews {
   String baseUrl = "https://www.ukr.net/";
 
   @BeforeClass
-  public  void before(){
-    System.setProperty("webdriver.gecko.driver","C:/Users/user/IdeaProjects/geckodriver.exe");
+  public void before() {
+    System.setProperty("webdriver.gecko.driver", "C:/Users/user/IdeaProjects/geckodriver.exe");
     driver = new FirefoxDriver();
-    driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     driver.manage().window().maximize();
     driver.get(baseUrl);
   }
 
-  //Technologies
   @Test
-  public  void technologyNews(){
+  public void getNews(){
+    scienceNews();
+    technologyNews();
+  }
+  public void technologyNews(){
     System.out.println("\nTechnology news:");
-    List<WebElement> news = driver.findElements(By.xpath(
-        "//section[@class='feed__section'][6]//div[@class='feed__item--title']/a"));
-    for (WebElement item: news) {
+    List <WebElement> news = driver.findElements(By.xpath(
+        "//section[@class='feed__section'][6]//div[@class='feed__item--title']//a"));
+    for (WebElement item : news) {
       System.out.println(item.getAttribute("textContent"));
     }
     System.out.println("-------------------------------------------------------------------------------------------");
   }
   //Science
-  @Test
-  public  void scienceNews(){
+  public void scienceNews() {
     System.out.println("\nScience news:");
-    List<WebElement> news = driver.findElements(By.xpath(
-        "//section[@class='feed__section'][7]//div[@class='feed__item']/a"));
-    for (WebElement item: news) {
+    List <WebElement> news = driver.findElements(By.xpath(
+        "//section[@class='feed__section'][7]//div[@class='feed__item']//a"));
+    for (WebElement item : news) {
       System.out.println(item.getAttribute("textContent"));
     }
     System.out.println("-------------------------------------------------------------------------------------------");
   }
 
   @AfterClass
-  public  void close(){
+  public void close() {
     driver.quit();
   }
 }
