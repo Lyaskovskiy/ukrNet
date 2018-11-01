@@ -1,21 +1,18 @@
-package firstPackage;
+package firstPackage.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class ApplicationManager {
   WebDriver driver;
   String baseUrl = "https://www.ukr.net/";
 
-  @BeforeClass
-  public void before() {
+  public void init() {
     System.setProperty("webdriver.gecko.driver", "C:/Users/user/IdeaProjects/geckodriver.exe");
     driver = new FirefoxDriver();
     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -60,8 +57,7 @@ public class TestBase {
     ternopilOption.click();
   }
 
-  @AfterClass
-  public void close() {
+  public void stop() {
     driver.quit();
   }
 }
